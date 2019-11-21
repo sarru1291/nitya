@@ -1,0 +1,12 @@
+header{
+    background-color: aqua;
+    height: 70px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    .title{
+        color:black;
+        font-size: 1.2rem;
+    }
+}
