@@ -1,0 +1,15 @@
+.s-btn{
+    display: flex;
+    flex-direction: column;
+    background: lightgrey;
+    padding: 5px;
+    cursor: pointer;
+    &:first-child{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .fa{
+        font-size:2.5rem;
+    }
+}

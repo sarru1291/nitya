@@ -10,6 +10,7 @@ const getWeb3 = () =>
         try {
           // Request account access if needed
           await window.ethereum.enable();
+          console.log("Injected web3 detected.");
           // Acccounts now exposed
           resolve(web3);
         } catch (error) {
@@ -30,7 +31,7 @@ const getWeb3 = () =>
         );
         const web3 = new Web3(provider);
         console.log("No web3 instance injected, using Local web3.");
-        resolve(web3);
+        // resolve(web3);
       }
     });
   });
