@@ -1,0 +1,12 @@
+.services{
+    display: flex;
+    justify-content: space-around;
+    // height:100vh;
+    a{
+        color: #41AAA8;
+        text-decoration: none;
+    }
+    a:hover{
+        color: black;
+    }
+}

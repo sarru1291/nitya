@@ -3,7 +3,7 @@ import './navbar.scss';
 const Navbar=(props)=> {
     return (
         <header>
-            <div className="title">Nitya</div>
+            <div className="title">Nitya - A Decentralised Criminal Justice System</div>
         </header>
     )
 }
