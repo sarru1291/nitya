@@ -15,6 +15,8 @@ contract Nitya{
         string subject;
         string description;
         string status;
+        string[] new_records;
+        uint complaint_ref_no;
     }
     struct Agency{
         address id;
@@ -27,17 +29,29 @@ contract Nitya{
     uint complaintCount;
     uint complainantCount;
     uint agencyCount;
+    uint complaint_ref_no;
     address admin;
     constructor() public {
         admin = msg.sender;
         complaintCount=0;
         complainantCount=0;
+        complaint_ref_no=20190000;
     }
     
     modifier onlyadmin() {
     require(msg.sender == admin);
     _;
     }
+    
+    function isAuthorisedAgency(address addr) internal view returns (bool){
+         for(uint i=1;i<=agencyCount;i++){
+            if(agencies[i].id == addr){
+                return true;
+            }
+        }
+        return false;
+    }
+  
     function parseAddr(string memory _a) internal pure returns (address _parsedAddress) {
     bytes memory tmp = bytes(_a);
     uint160 iaddr = 0;
@@ -65,19 +79,56 @@ contract Nitya{
     }
     return address(iaddr);
 }
+
     function getAdminAddress() public view returns(address){
         return admin;
+    }
+    
+    function getOwnAddress() public view returns(address){
+        return msg.sender;
     }
     
     function registerComplaint( string memory name, string memory gender,string memory addr,string memory mobile,string memory email,string memory subject, string memory description) public {
         complaintCount++;
         complainantCount++;
+        complaint_ref_no++;
         complainants[complainantCount]=Complainant(msg.sender,name,gender,addr,mobile,email);
-        complaints[complaintCount]=Complaint(msg.sender,subject,description,'Pending');
+        complaints[complaintCount].complainantID=msg.sender;
+        complaints[complaintCount].subject=subject;
+        complaints[complaintCount].description=description;
+        complaints[complaintCount].status="Pending";
+        complaints[complaintCount].new_records.push("Citizen registered complaint.");
+        complaints[complaintCount].complaint_ref_no=complaint_ref_no;
     }
     
-    function getComplaints(uint cid) public  view returns(address,string memory,string memory,string memory){
-            return (complaints[cid].complainantID,complaints[cid].subject,complaints[cid].description,complaints[cid].status);
+    function getAllComplaints() public view returns(Complaint[] memory){
+        Complaint[] memory all_complaints=new Complaint[](complaintCount);
+        uint count=0;
+        for(uint i=1;i<=complaintCount;i++){
+                all_complaints[count]=complaints[i];
+                count++;
+        }
+        return all_complaints;
+    }
+
+    function getMyComplaints() public view returns(Complaint[] memory){
+        Complaint[] memory my_complaints=new Complaint[](complaintCount);
+        uint count=0;
+        for(uint i=1;i<=complaintCount;i++){
+            if(complaints[i].complainantID==msg.sender){
+                my_complaints[count]=complaints[i];
+                count++;
+            }
+        }
+        return my_complaints;
+    }
+    
+    function getComplaintByRef(uint rid) public view returns(Complaint memory){
+        for(uint i=1;i<complaintCount;i++){
+            if(complaints[i].complaint_ref_no==rid){
+                return complaints[i];
+            }
+        }
     }
     
     function verifyAgency(string memory id,string memory name, string memory location) public onlyadmin {
@@ -85,16 +136,24 @@ contract Nitya{
         agencies[agencyCount]=Agency(parseAddr(id),name,location);
     }
     
-    function getAgencies(uint cid) public view returns(address,string memory,string memory) {
-        return (agencies[cid].id,agencies[cid].name,agencies[cid].location);
+    function getAllAgencies() public onlyadmin view returns(Agency[] memory){
+        Agency[] memory all_agencies=new Agency[](agencyCount);
+        uint count=0;
+        for(uint i=1;i<=agencyCount;i++){
+                all_agencies[count]=agencies[i];
+                count++;
+        }
+        return all_agencies;
+    }    
+    
+    function updateComplaint(string memory new_data, uint cid) public {
+        if(isAuthorisedAgency(msg.sender)){
+               uint len= complaints[cid].new_records.length;
+               len++;
+               complaints[cid].new_records.push(new_data);
+        }
     }
     
-    // function updateStatus(uint cid) public {
-    //     complaints[cid].status=Status.Accepted;
-    // }
     
-    // function checkStatus(uint cid) public  view returns(Status){
-    //     return complaints[cid].status;
-    // }
     
 }
