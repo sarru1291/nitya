@@ -1,5 +1,7 @@
 pragma solidity >=0.4.22 <0.6.0;
 pragma experimental ABIEncoderV2;
+
+
 contract Nitya{
 
     struct Complainant{
@@ -31,6 +33,7 @@ contract Nitya{
     uint agencyCount;
     uint complaint_ref_no;
     address admin;
+
     constructor() public {
         admin = msg.sender;
         complaintCount=0;
@@ -39,8 +42,8 @@ contract Nitya{
     }
     
     modifier onlyadmin() {
-    require(msg.sender == admin);
-    _;
+        require(msg.sender == admin);
+        _;
     }
     
     function isAuthorisedAgency(address addr) internal view returns (bool){
@@ -146,14 +149,14 @@ contract Nitya{
         return all_agencies;
     }    
     
-    function updateComplaint(string memory new_data, uint cid) public {
-        if(isAuthorisedAgency(msg.sender)){
-               uint len= complaints[cid].new_records.length;
-               len++;
-               complaints[cid].new_records.push(new_data);
-        }
+    function updateComplaint(string memory new_data, uint rid) public {
+        require(isAuthorisedAgency(msg.sender)==true);
+            for(uint i=0;i<complaintCount;i++){
+                if(complaints[i].complaint_ref_no==rid){
+                    complaints[i].new_records.push(new_data);
+                }
+            }
+        
     }
-    
-    
     
 }
