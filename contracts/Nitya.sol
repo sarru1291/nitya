@@ -23,6 +23,8 @@ contract Nitya{
     struct Agency{
         address id;
         string name;
+        string agency_type;
+        string assigned_person;
         string location;
     }
     mapping(uint=>Complaint) private complaints;
@@ -134,9 +136,9 @@ contract Nitya{
         }
     }
     
-    function verifyAgency(string memory id,string memory name, string memory location) public onlyadmin {
+    function verifyAgency(string memory id,string memory name,string memory agency_type, string memory assigned_person,string memory location) public onlyadmin {
         agencyCount++;
-        agencies[agencyCount]=Agency(parseAddr(id),name,location);
+        agencies[agencyCount]=Agency(parseAddr(id),name,agency_type, assigned_person,location);
     }
     
     function getAllAgencies() public onlyadmin view returns(Agency[] memory){
@@ -153,6 +155,11 @@ contract Nitya{
         require(isAuthorisedAgency(msg.sender)==true);
             for(uint i=0;i<complaintCount;i++){
                 if(complaints[i].complaint_ref_no==rid){
+                    bytes memory b = new bytes(20);
+                    for (uint j = 0; j < 20; j++){
+                        b[j] = byte(uint8(uint(msg.sender) / (2**(8*(19 - j)))));
+                    }
+                    complaints[i].new_records.push(string(b));
                     complaints[i].new_records.push(new_data);
                 }
             }
