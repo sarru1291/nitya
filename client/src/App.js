@@ -3,6 +3,8 @@ import Layout from "./hoc/layout/layout";
 import { Switch, Route } from "react-router-dom";
 import Home from "./pages/home/home";
 import RegisterComplaint from "./pages/registerComplaint/registerComplaint";
+import GetComplaints from './pages/getComplaints/getComplaints';
+import Aboutme from './pages/aboutme/aboutme';
 class App extends Component {
   render() {
     return (
@@ -13,6 +15,16 @@ class App extends Component {
             path="/registerComplaint"
             exact
             component={RegisterComplaint}
+          />
+          <Route
+            path="/getComplaints"
+            exact
+            component={GetComplaints}
+          />
+          <Route
+            path="/aboutme"
+            exact
+            component={Aboutme}
           />
           
 

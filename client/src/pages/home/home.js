@@ -7,6 +7,8 @@ import { User } from "../../context/user.context";
 const Home = props => {
   const { web3, accounts, contract } = useContext(User);
   console.table(accounts);
+  // console.log(contract);
+  
 
   if (!web3) {
     return (
@@ -17,8 +19,15 @@ const Home = props => {
   } else {
     return (
       <>
-        <p>Your address: {accounts[0]}</p>
+        {/* <p>Your address: {accounts[0]}</p> */}
         <div className="services">
+          <div>
+            <NavLink to="/aboutme" exact>
+              <ServiceButton name="About Me">
+                <i class="fa fa-user" />
+              </ServiceButton>
+            </NavLink>
+          </div>
           <div>
             <NavLink to="/registerComplaint" exact>
               <ServiceButton name="Register Complaint">
@@ -27,8 +36,8 @@ const Home = props => {
             </NavLink>
           </div>
           <div>
-            <NavLink to="/getComplaint" exact>
-              <ServiceButton name="Get Complaint">
+            <NavLink to="/getComplaints" exact>
+              <ServiceButton name="Get Complaints">
                 <i class="fa fa-search" />
               </ServiceButton>
             </NavLink>

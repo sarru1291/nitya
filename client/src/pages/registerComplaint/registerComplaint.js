@@ -19,7 +19,7 @@ export default function RegisterComplaint() {
   //     }
   //   };
   const registerComplaint = async () => {
-    // console.log(accounts[0]);
+    console.log(accounts[0]);
 
     try {
       await contract.methods
@@ -44,42 +44,47 @@ export default function RegisterComplaint() {
     }
   };
   return (
-    <div>
+    <div className="reg_com">
       <div className="reg_form">
-        <div>
-          complainant info name:{" "}
+        <div className="info_box">
+          <div>Your Name:</div>
           <input
             type="text"
             onChange={e => {
               setName(e.target.value);
             }}
           />
-          <br />
-          gender:{" "}
+          </div>
+          <div className="info_box">
+          <div>Gender:</div>
           <input
             type="text"
             onChange={e => {
               setGender(e.target.value);
             }}
           />
-          <br />
-          address:{" "}
+          </div>
+          <div className="info_box">
+          <div>
+            Address:</div>
           <input
             type="text"
             onChange={e => {
               setAddr(e.target.value);
             }}
-          />
-          <br />
-          mobile:{" "}
+          /></div>
+        <div className="info_box">
+          <div>
+          Mobile No:</div>
           <input
             type="text"
             onChange={e => {
               setMobile(e.target.value);
             }}
           />
-          <br />
-          email:{" "}
+        </div>
+        <div className="info_box">
+        <div>Email:</div>
           <input
             type="text"
             onChange={e => {
@@ -87,16 +92,17 @@ export default function RegisterComplaint() {
             }}
           />
         </div>
+        <div className="info_box">
         <div>
-          complain info Subject:{" "}
+      Subject:</div>
           <input
             type="text"
             onChange={e => {
               setSubject(e.target.value);
             }}
-          />{" "}
-          <br />
-          Description:{" "}
+          /></div>
+        <div className="info_box"><div>
+  Description:</div>
           <input
             type="text"
             onChange={e => {
@@ -104,17 +110,9 @@ export default function RegisterComplaint() {
             }}
           />
         </div>
-        <br />
       </div>
 
-      <button onClick={registerComplaint}>register complaint</button>
-      {/* <input
-              type="text"
-              onChange={e => {
-                  setComplaintIndex(e.target.value);
-              }}
-          /> */}
-      {/* <button onClick={getComplaint}>get complaints</button> */}
+      <button onClick={registerComplaint}>Register complaint</button>
     </div>
   );
 }

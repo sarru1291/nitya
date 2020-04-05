@@ -1,4 +1,27 @@
+.reg_com{
+    margin-top:20px;
+    
 .reg_form{
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    text-align: center;
+margin-left:40%;
+    .info_box{
+        display: flex;
+        flex-direction: row;
+        width: 300px;
+        div{
+            width: 70%;
+            height: 60px;
+        }
+        input{
+            margin-bottom: 10px;
+            height:30px;
+        }
+    }
+}
+button{
+    margin-top:30px;
+    margin-left:45%;
+}
 }
