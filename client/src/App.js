@@ -5,6 +5,8 @@ import Home from "./pages/home/home";
 import RegisterComplaint from "./pages/registerComplaint/registerComplaint";
 import GetComplaints from './pages/getComplaints/getComplaints';
 import Aboutme from './pages/aboutme/aboutme';
+import AccountRegister from './pages/accountRegister/accountRegister';
+import AccountAuthorise from './pages/accountAuthorise/accountAuthorise';
 class App extends Component {
   render() {
     return (
@@ -16,17 +18,10 @@ class App extends Component {
             exact
             component={RegisterComplaint}
           />
-          <Route
-            path="/getComplaints"
-            exact
-            component={GetComplaints}
-          />
-          <Route
-            path="/aboutme"
-            exact
-            component={Aboutme}
-          />
-          
+          <Route path="/getComplaints" exact component={GetComplaints} />
+          <Route path="/aboutme" exact component={Aboutme} />
+          <Route path="/accountAuthorise" exact component={AccountAuthorise} />
+          <Route path="/accountRegister" exact component={AccountRegister} />
 
           {/* <Route path="/:type" exact component={ProductList} />
             <Route path="/:type/:handle" exact component={Product} /> */}

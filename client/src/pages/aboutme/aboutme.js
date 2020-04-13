@@ -1,22 +1,28 @@
-import React from 'react';
-import { useContext } from "react";
+import React, { useState } from 'react';
+import { useContext,useEffect } from "react";
 import { User } from '../../context/user.context';
 import './aboutme.scss'
 function Aboutme(props) {
     const { web3, accounts, contract } = useContext(User);
+    const [myComplaints, setMyComplaints] = useState([]);
+    // useEffect(() => {
+    //   getMyComplaints(contract, accounts);
+    // });
     const getMyComplaints = async () => {
 
         try {
-           let my_complaints= await contract.methods
+            let my_complaints = [];
+            setMyComplaints(my_complaints)
+           my_complaints= await contract.methods
                 .getMyComplaints()
                .call({from:accounts[0]});
             // console.log(my_complaints);
-            return my_complaints;
+            setMyComplaints(my_complaints);
+            // setComplaintGet(true);
 
         } catch (error) {
-            if (window.confirm("Error Found")) {
-                window.location.reload();
-            }
+           console.log("MyComplaints-error");
+           
         }
     };
 
@@ -27,17 +33,37 @@ function Aboutme(props) {
             </>
         );
     } else {
-        let my_complaints = getMyComplaints();
-        // let my_complaints_size = my_complaints.size();
-        
-        console.log(my_complaints[0]);
-        
-        return (
-            <div className="aboutme">
+        let my_complaints = myComplaints.map((comp,ind) => {
+            console.log(comp);
+            return (
+                <div>
+                    <h2>{ind}</h2>
+                    Address: {comp[0]}
+                <br />
+                    {comp[1]}
+                <br />
+                    {comp[2]}
+                <br />
+                    {comp[3]}
+                <br />
+                    {comp[4]}
+                    <br />
+                    <br></br><br></br>
+              </div>
+            );
+        });
+            return (
+              <div className="aboutme">
                 <div> Account ID: {accounts[0]}</div>
-                <div>My Complaints: </div>
-            </div>
-        )
+                <div>
+                  My Complaints:{" "}
+                  <button onClick={getMyComplaints}>Get My Complaints</button>{" "}
+                    </div>
+                    <div>list:<br></br>{my_complaints}</div>
+              </div>
+            );
+        
+        
     }
 }
 

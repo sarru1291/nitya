@@ -136,12 +136,12 @@ contract Nitya{
         }
     }
     
-    function verifyAgency(string memory id,string memory name,string memory agency_type, string memory assigned_person,string memory location) public onlyadmin {
+    function verifyAgency(string memory id,string memory name,string memory agency_type, string memory assigned_person,string memory location) public {
         agencyCount++;
         agencies[agencyCount]=Agency(parseAddr(id),name,agency_type, assigned_person,location);
     }
     
-    function getAllAgencies() public onlyadmin view returns(Agency[] memory){
+    function getAllAgencies() public view returns(Agency[] memory){
         Agency[] memory all_agencies=new Agency[](agencyCount);
         uint count=0;
         for(uint i=1;i<=agencyCount;i++){
