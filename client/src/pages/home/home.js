@@ -57,6 +57,13 @@ const Home = props => {
                      </ServiceButton>
                    </NavLink>
                  </div>
+                 <div>
+                   <NavLink to="/updateComplaint" exact>
+                     <ServiceButton name="Update Complaint">
+                       <i class="fa fa-edit" />
+                     </ServiceButton>
+                   </NavLink>
+                 </div>
                  {accountAuthoriseOption}
                  {/* <div>
                    <NavLink to="/accountRegister" exact>
