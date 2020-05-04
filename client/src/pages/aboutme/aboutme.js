@@ -16,7 +16,7 @@ function Aboutme(props) {
            my_complaints= await contract.methods
                 .getMyComplaints()
                .call({from:accounts[0]});
-            // console.log(my_complaints);
+            console.log(my_complaints);
             setMyComplaints(my_complaints);
             // setComplaintGet(true);
 
@@ -33,7 +33,20 @@ function Aboutme(props) {
             </>
         );
     } else {
+        
         let my_complaints = myComplaints.map((comp,ind) => {
+            if(comp[0]=='0x0000000000000000000000000000000000000000' ){
+                if(ind==0){
+                return (<div>
+                    <h6>No Complaints from this Account!!</h6>
+                    </div>);
+                }
+                else{
+                    return (<div>
+                        </div>);
+                    }
+                }
+            
             console.log(comp);
             return (
                 <div>
