@@ -57,15 +57,18 @@ export default function GetComplaints() {
     return (
       <div>
         <h2>{index}&nbsp;{edit_button}</h2>
-        {comp[0]}
+        
+        <b>Address:</b> {comp[0]}
         <br />
-        {comp[1]}
+        <b>Type:</b> {comp[1]}
         <br />
-        {comp[2]}
+        <b> Description:</b> {comp[2]}
         <br />
-        {comp[3]}
+        <b>Status: </b >{comp[3]}
         <br />
         {comp[4]}
+        <br />
+        <b> Reference ID:</b > {comp[5]}
         <br />
       </div>
     );
@@ -83,7 +86,7 @@ export default function GetComplaints() {
               Results:
         <br />
               <div className="result_list">
-                  {result_lists}
+          <button>Update Status</button>   {result_lists}
               </div>
       </div>
     </div>
