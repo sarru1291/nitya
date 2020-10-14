@@ -1,8 +1,0 @@
-1. Open the Ganache local blockchain & create new workplace 
-2. Integrate blockchain to MetaMask (localhost:7545)
-3. Import account from Ganache
-3. Build and deploy smart contract to ganache blockchain
-    truffle compile --all
-    truffle migrate --reset
-4. Start client
-    cd client && npm start

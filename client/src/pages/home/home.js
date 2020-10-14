@@ -20,7 +20,7 @@ const Home = props => {
     let adminAccount = false;
     let accountAuthoriseOption;
     
-           if (accounts[0] == '0x54a9F8E3AF0Ad69f3934991F295029126604Fe45') {
+           if (accounts[0] == '0x7f984DcA7A134A65816be89d643FD6ac53A3AF8D') {
              adminAccount = true;
              accountAuthoriseOption = (
                <div>
